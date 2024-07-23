@@ -12,7 +12,7 @@ import {
   ScrollView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {app_icons, app_images} from '../../utils';
+import { app_icons, app_images } from '../../utils';
 import {
   fontPixel,
   heightPixel,
@@ -25,13 +25,13 @@ const SignInScreen = () => {
       source={app_images.background}
       style={styles.container}
       resizeMethod="auto"
-      resizeMode="cover">
+      resizeMode="contain">
       <KeyboardAvoidingView
-        style={{flex: 1}}
+        style={{ flex: 1 }}
         behavior={Platform.OS == 'ios' ? 'height' : null}
-        // onStartShouldSetResponderCapture={() => setIsUserClicked(false)}
+      // onStartShouldSetResponderCapture={() => setIsUserClicked(false)}
       >
-        <ScrollView style={{flex: 1}}>
+        <ScrollView style={{ flex: 1 }}>
           <View style={styles.innerContainer}>
             <View style={styles.imageView}>
               <Image source={app_icons.logo} style={styles.logoStyle} />
@@ -47,8 +47,8 @@ const SignInScreen = () => {
                 'rgba(255, 255, 255, 0.06)',
                 'rgba(255, 255, 255, 0.02)',
               ]}
-              start={{x: 0, y: 1}}
-              end={{x: 1, y: 1}}
+              start={{ x: 0, y: 1 }}
+              end={{ x: 1, y: 1 }}
               style={styles.inputLinerStyle}>
               <Image source={app_icons.user} style={styles.iconStyle} />
               <TextInput
@@ -63,8 +63,8 @@ const SignInScreen = () => {
                 'rgba(255, 255, 255, 0.06)',
                 'rgba(255, 255, 255, 0.02)',
               ]}
-              start={{x: 0, y: 1}}
-              end={{x: 1, y: 1}}
+              start={{ x: 0, y: 1 }}
+              end={{ x: 1, y: 1 }}
               style={styles.inputLinerStyle}>
               <Image source={app_icons.password} style={styles.iconStyle} />
               <TextInput
@@ -77,8 +77,8 @@ const SignInScreen = () => {
             <TouchableOpacity style={styles.button}>
               <LinearGradient
                 colors={['rgba(0, 0, 0, 1)', 'rgba(198, 86, 71, 1)']}
-                start={{x: 0, y: 1}}
-                end={{x: 1, y: 1}}
+                start={{ x: 0, y: 1 }}
+                end={{ x: 1, y: 1 }}
                 style={styles.buttonGradient}>
                 <Text style={styles.buttonText}>Sign in</Text>
               </LinearGradient>
@@ -88,15 +88,15 @@ const SignInScreen = () => {
               <LinearGradient
                 colors={['rgba(217, 217, 217, 0)', 'rgba(217, 217, 217, 0.75)']}
                 style={styles.divider}
-                start={{x: 0, y: 1}}
-                end={{x: 1, y: 1}}
+                start={{ x: 0, y: 1 }}
+                end={{ x: 1, y: 1 }}
               />
               <Text style={styles.dividerText}>Or continue with</Text>
               <LinearGradient
                 colors={['rgba(217, 217, 217, 0.75)', 'rgba(217, 217, 217, 0)']}
                 style={styles.divider}
-                start={{x: 0, y: 1}}
-                end={{x: 1, y: 1}}
+                start={{ x: 0, y: 1 }}
+                end={{ x: 1, y: 1 }}
               />
             </View>
 
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   },
 
   innerContainer: {
-    flex:1,
+    flex: 1,
     paddingHorizontal: widthPixel(20),
     borderRadius: heightPixel(10),
     margin: heightPixel(20),
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   },
   imageView: {
     alignSelf: 'center',
-    marginTop:heightPixel(20),
+    marginTop: heightPixel(20),
   },
   logoStyle: {
     width: widthPixel(135),
