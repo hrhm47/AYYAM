@@ -12,26 +12,25 @@ import {
   ScrollView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { app_icons, app_images } from '../../utils';
+import {app_icons, app_images} from '../../utils';
 import {
   fontPixel,
   heightPixel,
+  SCREEN_WIDTH,
   widthPixel,
 } from '../../utils/pixelRatio/PixelRatio';
+import {SearchBar} from '@rneui/themed';
 
 const SignInScreen = () => {
   return (
     <ImageBackground
       source={app_images.background}
       style={styles.container}
-      resizeMethod="auto"
-      resizeMode="contain">
+      resizeMode={Platform.select({ios: 'contain', android: 'stretch'})}>
       <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS == 'ios' ? 'height' : null}
-      // onStartShouldSetResponderCapture={() => setIsUserClicked(false)}
-      >
-        <ScrollView style={{ flex: 1 }}>
+        style={{flex: 1}}
+        behavior={Platform.OS == 'ios' ? 'height' : null}>
+        <ScrollView style={{flex: 1}}>
           <View style={styles.innerContainer}>
             <View style={styles.imageView}>
               <Image source={app_icons.logo} style={styles.logoStyle} />
@@ -47,8 +46,8 @@ const SignInScreen = () => {
                 'rgba(255, 255, 255, 0.06)',
                 'rgba(255, 255, 255, 0.02)',
               ]}
-              start={{ x: 0, y: 1 }}
-              end={{ x: 1, y: 1 }}
+              start={{x: 0, y: 1}}
+              end={{x: 1, y: 1}}
               style={styles.inputLinerStyle}>
               <Image source={app_icons.user} style={styles.iconStyle} />
               <TextInput
@@ -63,22 +62,23 @@ const SignInScreen = () => {
                 'rgba(255, 255, 255, 0.06)',
                 'rgba(255, 255, 255, 0.02)',
               ]}
-              start={{ x: 0, y: 1 }}
-              end={{ x: 1, y: 1 }}
+              start={{x: 0, y: 1}}
+              end={{x: 1, y: 1}}
               style={styles.inputLinerStyle}>
               <Image source={app_icons.password} style={styles.iconStyle} />
               <TextInput
                 placeholder="*********"
                 style={styles.input}
                 placeholderTextColor={'#A4A4A4'}
+                secureTextEntry={true}
               />
             </LinearGradient>
 
             <TouchableOpacity style={styles.button}>
               <LinearGradient
-                colors={['rgba(0, 0, 0, 1)', 'rgba(198, 86, 71, 1)']}
-                start={{ x: 0, y: 1 }}
-                end={{ x: 1, y: 1 }}
+                colors={['rgba(0, 0, 0, 1)', 'rgba(198, 86, 71, .78)']}
+                start={{x: 0, y: 1}}
+                end={{x: 1, y: 1}}
                 style={styles.buttonGradient}>
                 <Text style={styles.buttonText}>Sign in</Text>
               </LinearGradient>
@@ -88,49 +88,55 @@ const SignInScreen = () => {
               <LinearGradient
                 colors={['rgba(217, 217, 217, 0)', 'rgba(217, 217, 217, 0.75)']}
                 style={styles.divider}
-                start={{ x: 0, y: 1 }}
-                end={{ x: 1, y: 1 }}
+                start={{x: 0, y: 1}}
+                end={{x: 1, y: 1}}
               />
               <Text style={styles.dividerText}>Or continue with</Text>
               <LinearGradient
                 colors={['rgba(217, 217, 217, 0.75)', 'rgba(217, 217, 217, 0)']}
                 style={styles.divider}
-                start={{ x: 0, y: 1 }}
-                end={{ x: 1, y: 1 }}
+                start={{x: 0, y: 1}}
+                end={{x: 1, y: 1}}
               />
             </View>
 
             <View style={styles.socialIconView}>
-              <ImageBackground
-                source={app_icons.card}
-                resizeMode="contain"
-                style={styles.socialIconStyle}>
-                <Image
-                  source={app_icons.google}
+              <TouchableOpacity>
+                <ImageBackground
+                  source={app_icons.card}
                   resizeMode="contain"
-                  style={styles.socialIconInnerStyle}
-                />
-              </ImageBackground>
-              <ImageBackground
-                source={app_icons.card}
-                resizeMode="contain"
-                style={styles.socialIconStyle}>
-                <Image
-                  source={app_icons.apple}
+                  style={styles.socialIconStyle}>
+                  <Image
+                    source={app_icons.google}
+                    resizeMode="contain"
+                    style={styles.socialIconInnerStyle}
+                  />
+                </ImageBackground>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <ImageBackground
+                  source={app_icons.card}
                   resizeMode="contain"
-                  style={styles.socialIconInnerStyle}
-                />
-              </ImageBackground>
-              <ImageBackground
-                source={app_icons.card}
-                resizeMode="contain"
-                style={styles.socialIconStyle}>
-                <Image
-                  source={app_icons.facebook}
+                  style={styles.socialIconStyle}>
+                  <Image
+                    source={app_icons.apple}
+                    resizeMode="contain"
+                    style={styles.socialIconInnerStyle}
+                  />
+                </ImageBackground>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <ImageBackground
+                  source={app_icons.card}
                   resizeMode="contain"
-                  style={styles.socialIconInnerStyle}
-                />
-              </ImageBackground>
+                  style={styles.socialIconStyle}>
+                  <Image
+                    source={app_icons.facebook}
+                    resizeMode="contain"
+                    style={styles.socialIconInnerStyle}
+                  />
+                </ImageBackground>
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
@@ -144,10 +150,12 @@ const styles = StyleSheet.create({
     // marginTop: heightPixel(20),
     flex: 1,
     // backgroundColor: 'black',
+    // width: SCREEN_WIDTH,
+    // height:'100%'
   },
 
   innerContainer: {
-    flex: 1,
+    // flex: 1,
     paddingHorizontal: widthPixel(20),
     borderRadius: heightPixel(10),
     margin: heightPixel(20),
@@ -187,12 +195,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginVertical: heightPixel(10),
     paddingHorizontal: widthPixel(15),
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, .3)',
   },
   input: {
     width: widthPixel(250),
     height: heightPixel(50),
     paddingHorizontal: widthPixel(10),
-    color: '',
+    color: '#fff',
   },
   iconStyle: {
     width: widthPixel(19),
